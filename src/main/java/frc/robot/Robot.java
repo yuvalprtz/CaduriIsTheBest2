@@ -22,13 +22,13 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 public class Robot extends TimedRobot {
   private final CommandXboxController xBox = new CommandXboxController(0);
   
-  private final TalonSRX motorControlLeft = new TalonSRX(0); 
-  private final TalonSRX motorControlRight = new TalonSRX(1);
+  private final TalonSRX motorControlLeft = new TalonSRX(5); 
+  private final TalonSRX motorControlRight = new TalonSRX(8);
 
   @Override
   public void teleopPeriodic() {
-    final double inputX = xBox.getRightX();
-    final double inputY = xBox.getLeftY();
+    final double inputY = xBox.getRightX();
+    final double inputX = xBox.getLeftY();
                 
     final double outputLeft = Math.max(Math.min(inputY + inputX, 1), -1);
     final double outputRight = Math.max(Math.min(inputY - inputX, 1), -1);
