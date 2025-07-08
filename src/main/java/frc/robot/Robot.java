@@ -29,6 +29,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     final double inputX = xBox.getRightX();
     final double inputY = xBox.getLeftY();
+                
     final double outputLeft = Math.max(Math.min(inputY + inputX, 1), -1);
     final double outputRight = Math.max(Math.min(inputY - inputX, 1), -1);
     
