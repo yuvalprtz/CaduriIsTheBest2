@@ -27,11 +27,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    final double inputY = xBox.getRightX();
-    final double inputX = xBox.getLeftY();
+    final double inputX = xBox.getRightX();
+    final double inputY = xBox.getLeftY();
                 
     final double outputLeft = Math.max(Math.min(inputY + inputX, 1), -1);
-    final double outputRight = Math.max(Math.min(inputY - inputX, 1), -1);
+    final double outputRight = -Math.max(Math.min(inputY - inputX, 1), -1);
     
     motorControlLeft.set(ControlMode.PercentOutput, outputLeft); 
     motorControlRight.set(ControlMode.PercentOutput, outputRight);
