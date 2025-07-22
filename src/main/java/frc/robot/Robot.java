@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 /**
  * This is a demo program showing the use of the DifferentialDrive class, specifically it contains
- * the code necessary to operate a robot with tank drive. //TODO REMOVE COMMENTS
+ * the code necessary to operate a robot with tank drive.
  */
 public class Robot extends TimedRobot {
   private final CommandXboxController xBox = new CommandXboxController(0);
@@ -25,13 +25,17 @@ public class Robot extends TimedRobot {
   private final TalonSRX motorControlLeft = new TalonSRX(5); 
   private final TalonSRX motorControlRight = new TalonSRX(8);
 
+  public Robot() {
+    motorControlRight.setInverted(true);
+  }
+
   @Override
   public void teleopPeriodic() {
     final double inputX = xBox.getRightX();
     final double inputY = xBox.getLeftY();
                 
     final double outputLeft = Math.max(Math.min(inputY + inputX, 1), -1);
-    final double outputRight = -Math.max(Math.min(inputY - inputX, 1), -1);
+    final double outputRight = Math.max(Math.min(inputY - inputX, 1), -1);
     
     motorControlLeft.set(ControlMode.PercentOutput, outputLeft); 
     motorControlRight.set(ControlMode.PercentOutput, outputRight);
