@@ -5,16 +5,23 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
 
 
 public class Robot extends TimedRobot {
+ CommandScheduler sch = CommandScheduler.getInstance();
+ 
   private final CommandXboxController xboxController = new CommandXboxController(0); 
 
   private final Drive drive = new Drive();
   
   public Robot() {
     drive.setDefaultCommand(drive.go(() -> xboxController.getLeftY(), () -> xboxController.getRightX()));
+  }
+
+  public void teleopPeriodic() {
+    sch.run();
   }
 } 
