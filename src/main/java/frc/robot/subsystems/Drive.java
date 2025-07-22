@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drive extends SubsystemBase {
-  private final double SPEED = 0.1;
+  private static final double SPEED = 0.2;
 
   private final TalonSRX motorControlLeft = new TalonSRX(5); 
   private final TalonSRX motorControlRight = new TalonSRX(8);
@@ -18,36 +18,13 @@ public class Drive extends SubsystemBase {
     motorControlRight.setInverted(true);
   }
 
-  public Command go(Supplier<Double> howMuchKadima, Supplier<Double> turn) {
-    return this.run(() -> {
-      final double outputLeft = Math.max(Math.min(howMuchKadima.get() + turn.get(), 1), -1);
-      final double outputRight = -Math.max(Math.min(howMuchKadima.get() - turn.get(), 1), -1);
+  public Command go(Supplier<Double> howMuchKadima, Supplier<Double> howMuchLatsida) {
+    return this.run(() -> { 
+      final double outputLeft = Math.max(Math.min(howMuchKadima.get() + howMuchLatsida.get(), 1), -1);
+      final double outputRight = -Math.max(Math.min(howMuchKadima.get() - howMuchLatsida.get(), 1), -1);
       
       motorControlLeft.set(ControlMode.PercentOutput, outputLeft * SPEED); 
       motorControlRight.set(ControlMode.PercentOutput, outputRight * SPEED);
     });
-  }
-
-  private Command createMovementCommand(double leftMotorDirection, double rightMotorDirection, double amplitude) {
-    return this.run(() -> {
-      motorControlLeft.set(ControlMode.PercentOutput, leftMotorDirection * amplitude); 
-      motorControlLeft.set(ControlMode.PercentOutput, rightMotorDirection * amplitude);
-    });
-  }
-
-  public Command goForward(double amplitude) {
-    return createMovementCommand(1, 1, amplitude);
-  }
-  
-  public Command goBackward(double amplitude) {
-    return createMovementCommand(-1, -1, amplitude);
-  }
-  
-  public Command turnLeft(double amplitude) {
-    return createMovementCommand(-1, 1, amplitude);
-  }
-  
-  public Command turnRight(double amplitude) {
-    return createMovementCommand(1, -1, amplitude);
   }
 }

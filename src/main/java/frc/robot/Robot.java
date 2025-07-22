@@ -20,11 +20,11 @@ import frc.robot.subsystems.Drive;
 
 
 public class Robot extends TimedRobot {
-  private final CommandXboxController xBox = new CommandXboxController(0);
+  private final CommandXboxController xboxController = new CommandXboxController(0); //BETTER NAME
 
   private final Drive drive = new Drive();
   
   public Robot() {
-    drive.setDefaultCommand(drive.go(() -> xBox.getLeftY(), () -> xBox.getRightX()));
+    drive.setDefaultCommand(drive.go(() -> xboxController.getLeftY(), () -> xboxController.getRightX()));
   }
 } 
