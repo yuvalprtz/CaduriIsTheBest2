@@ -10,34 +10,21 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.util.sendable.SendableRegistry;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.subsystems.Drive;
 
-/**
- * This is a demo program showing the use of the DifferentialDrive class, specifically it contains
- * the code necessary to operate a robot with tank drive.
- */
+
 public class Robot extends TimedRobot {
   private final CommandXboxController xBox = new CommandXboxController(0);
+
+  private final Drive drive = new Drive();
   
-  private final TalonSRX motorControlLeft = new TalonSRX(5); 
-  private final TalonSRX motorControlRight = new TalonSRX(8);
-
   public Robot() {
-    motorControlRight.setInverted(true);
+    drive.setDefaultCommand(drive.go(() -> xBox.getLeftY(), () -> xBox.getRightX()));
   }
-
-  @Override
-  public void teleopPeriodic() {
-    final double inputX = xBox.getRightX();
-    final double inputY = xBox.getLeftY();
-                
-    final double outputLeft = Math.max(Math.min(inputY + inputX, 1), -1);
-    final double outputRight = Math.max(Math.min(inputY - inputX, 1), -1);
-    
-    motorControlLeft.set(ControlMode.PercentOutput, outputLeft); 
-    motorControlRight.set(ControlMode.PercentOutput, outputRight);
-  }
-}
+} 
