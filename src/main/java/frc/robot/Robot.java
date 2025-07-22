@@ -4,23 +4,23 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode; //TODO: Useless imports
+import com.ctre.phoenix.motorcontrol.can.TalonSRX; //TODO: Useless imports
 
-import edu.wpi.first.util.sendable.SendableRegistry;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.util.sendable.SendableRegistry; //TODO: Useless imports
+import edu.wpi.first.wpilibj.Joystick; //TODO: Useless imports
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
-import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj.XboxController; //TODO: Useless imports
+import edu.wpi.first.wpilibj.drive.DifferentialDrive; //TODO: Useless imports
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax; //TODO: Useless imports
+import edu.wpi.first.wpilibj.motorcontrol.Talon; //TODO: Useless imports
+import edu.wpi.first.wpilibj2.command.Commands; //TODO: Useless imports
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
 
 
 public class Robot extends TimedRobot {
-  private final CommandXboxController xboxController = new CommandXboxController(0); //BETTER NAME
+  private final CommandXboxController xboxController = new CommandXboxController(0); 
 
   private final Drive drive = new Drive();
   
