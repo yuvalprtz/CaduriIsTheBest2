@@ -18,9 +18,9 @@ public class Robot extends TimedRobot {
   private final Drive drive = new Drive();
   
   public Robot() {
-    xboxController.leftTrigger().whileTrue(drive.goFwdBwd(() -> xboxController.getLeftY()));
-    xboxController.rightTrigger().whileTrue(drive.turn(() -> xboxController.getRightX()));
-    xboxController.a().onTrue(drive.goForwardThenRight());
+    xboxController.leftTrigger().whileTrue(drive.translate(() -> xboxController.getLeftY()).andThen(drive.stopMotors()));
+    xboxController.rightTrigger().whileTrue(drive.turn(() -> xboxController.getRightX()).andThen(drive.stopMotors()));
+    xboxController.a().whileTrue(drive.translate(() -> 1).withTimeout(2).andThen(drive.turn(() -> 1).withTimeout(1)).andThen(drive.stopMotors()));
   }
 
   public void teleopPeriodic() {

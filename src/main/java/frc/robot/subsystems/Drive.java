@@ -9,7 +9,6 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class Drive extends SubsystemBase {
   private static final double SPEED = 0.2;
@@ -42,15 +41,11 @@ public class Drive extends SubsystemBase {
     }, this);
   }
 
-  public Command goFwdBwd(DoubleSupplier amplitude) {
-    return go(() -> 0, amplitude).andThen(stopMotors());
+  public Command translate(DoubleSupplier amplitude) {
+    return go(() -> 0, amplitude);
   }
 
   public Command turn(DoubleSupplier amplitude) {
-    return go(amplitude, () -> 0).andThen(stopMotors());
-  }
-
-  public Command goForwardThenRight() {
-    return go(() -> 0, () -> 1).withTimeout(2).andThen(go(() -> 1, () -> 0).withTimeout(1)).andThen(stopMotors());
+    return go(amplitude, () -> 0);
   }
 }
