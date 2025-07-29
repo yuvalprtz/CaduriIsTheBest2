@@ -18,7 +18,7 @@ public class Robot extends TimedRobot {
   private final Drive drive = new Drive();
   
   public Robot() {
-    drive.setDefaultCommand(drive.go(() -> xboxController.getLeftY(), () -> xboxController.getRightX()));
+    drive.setDefaultCommand(drive.go(() -> xboxController.getRightX(), () -> xboxController.getLeftY()));
   }
 
   public void teleopPeriodic() {
