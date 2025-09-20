@@ -20,9 +20,15 @@ public class Robot extends TimedRobot {
   public Robot() {
     xboxController.leftTrigger().whileTrue(drive.translate(() -> xboxController.getLeftY()));
     xboxController.leftTrigger().onFalse(drive.stopMotors());
+
     xboxController.rightTrigger().whileTrue(drive.turn(() -> xboxController.getRightX()));
     xboxController.rightTrigger().onFalse(drive.stopMotors());
-    xboxController.a().whileTrue(drive.translate(() -> 0.5).withTimeout(0.5).andThen(drive.turn(() -> 0.5).withTimeout(0.5)));
+
+    xboxController.a().whileTrue(
+      drive.translate(() -> 1).withTimeout(1)
+      .andThen(drive.turn(() -> 1).withTimeout(1))
+      .andThen(drive.stopMotors())
+    );
     xboxController.a().onFalse(drive.stopMotors());
   }
 
